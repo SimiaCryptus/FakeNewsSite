@@ -66,7 +66,7 @@ export const useNewStories = (page: number = 1, pageSize: number = 5): UseStorie
   return { data, loading, error, refetch: fetchData };
 };
 
-export const useStory = (id: number | null): UseStoryState => {
+export const useStory = (id: number | string | null): UseStoryState => {
   const [data, setData] = useState<Story | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -97,7 +97,7 @@ export const useStory = (id: number | null): UseStoryState => {
 };
 
 export const useStoryComments = (
-  storyId: number | null,
+  storyId: number | string | null,
   page: number = 1,
   pageSize: number = 5
 ): UseStoriesState => {

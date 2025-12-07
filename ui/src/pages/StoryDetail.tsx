@@ -10,7 +10,9 @@ import './StoryDetail.css';
 
 export const StoryDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const storyId = id ? parseInt(id, 10) : null;
+  console.log('StoryDetail: id param:', id);
+  const storyId: string | null = id || null;
+  console.log('StoryDetail: parsed storyId:', storyId);
 
   const {
     data: story,
@@ -25,8 +27,12 @@ export const StoryDetail: React.FC = () => {
     error: commentsError,
     refetch: refetchComments,
   } = useStoryComments(storyId, 1, 100);
+  console.log('StoryDetail: story state:', { story, storyLoading, storyError });
+  console.log('StoryDetail: comments state:', { commentsData, commentsLoading, commentsError });
+
 
   useEffect(() => {
+    console.log('StoryDetail: scrolling to top for id:', id);
     window.scrollTo(0, 0);
   }, [id]);
 

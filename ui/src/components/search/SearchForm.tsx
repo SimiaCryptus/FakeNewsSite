@@ -107,6 +107,7 @@ export const SearchForm: React.FC<SearchFormProps> = ({
           fullWidth
           loading={loading}
           disabled={loading}
+          className="search-form__submit-btn"
         >
           Search
         </Button>

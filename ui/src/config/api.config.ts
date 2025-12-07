@@ -33,8 +33,8 @@ export const ENDPOINTS = {
   // Stories
   STORIES_TOP: '/api/stories/top',
   STORIES_NEW: '/api/stories/new',
-  STORY_DETAIL: (id: number) => `/api/stories/${id}`,
-  STORY_COMMENTS: (id: number) => `/api/stories/${id}/comments`,
+  STORY_DETAIL: (id: number | string) => `/api/stories/${id}`,
+  STORY_COMMENTS: (id: number | string) => `/api/stories/${id}/comments`,
   STORIES_SEARCH: '/api/stories/search',
   
   // Comments

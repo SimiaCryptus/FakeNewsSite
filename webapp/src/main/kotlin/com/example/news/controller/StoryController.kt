@@ -18,7 +18,7 @@ class StoryController(private val newsApiService: NewsApiService) {
     val pagination = PaginationParams(page = page, pageSize = pageSize)
     val topStoryIds = newsApiService.getTopStoryIds(pagination)
     return topStoryIds.copy(
-      ids = topStoryIds.ids.take(pageSize),
+      ids = topStoryIds.ids.drop((page - 1) * pageSize).take(pageSize),
       totalCount = topStoryIds.totalCount.coerceAtMost(50),
       page = page,
       pageSize = pageSize,
@@ -34,7 +34,7 @@ class StoryController(private val newsApiService: NewsApiService) {
     val pagination = PaginationParams(page = page, pageSize = pageSize)
     val storyIds = newsApiService.getNewStoryIds(pagination)
     return storyIds.copy(
-      ids = storyIds.ids.take(pageSize),
+      ids = storyIds.ids.drop((page - 1) * pageSize).take(pageSize),
       totalCount = storyIds.totalCount.coerceAtMost(50),
       page = page,
       pageSize = pageSize,
@@ -76,7 +76,7 @@ class StoryController(private val newsApiService: NewsApiService) {
     val pagination = PaginationParams(page = page, pageSize = pageSize)
     val storyComments = newsApiService.getStoryComments(id, pagination)
     return storyComments.copy(
-      ids = storyComments.ids.take(pageSize),
+      ids = storyComments.ids.drop((page - 1) * pageSize).take(pageSize),
       totalCount = storyComments.totalCount.coerceAtMost(50),
       page = page,
       pageSize = pageSize,

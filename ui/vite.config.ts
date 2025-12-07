@@ -15,8 +15,9 @@ plugins: [react()],
     },
   },
   build: {
-    outDir: 'dist',
+    outDir: 'build',
     sourcemap: true,
+    minify: false,
     rollupOptions: {
       output: {
         manualChunks: {

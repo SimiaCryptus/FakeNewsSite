@@ -4,6 +4,7 @@ import { Button } from '../components/common/Button';
 import './NotFound.css';
 
 export const NotFound: React.FC = () => {
+  console.log(`NotFound page rendered for: ${window.location.pathname}`);
   return (
     <div className="not-found">
       <div className="not-found__content">

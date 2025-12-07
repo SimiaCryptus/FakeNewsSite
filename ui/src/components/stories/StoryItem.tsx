@@ -30,27 +30,19 @@ export const StoryItem: React.FC<StoryItemProps> = ({
         <div className="story-item__main">
           <div className="story-item__header">
             <h2 className="story-item__title">
-              {isExternalLink ? (
-                <>
-                  <a
+              <Link to={`/story/${story.id}`} className="story-item__link">
+                {story.title}
+              </Link>
+              {isExternalLink && domain && (
+                <span className="story-item__domain">
+                  (<a
                     href={story.url!}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="story-item__link story-item__link--external"
                   >
-                    {story.title}
-                  </a>
-                  {domain && (
-                    <span className="story-item__domain">({domain})</span>
-                  )}
-                </>
-              ) : (
-                <Link
-                  to={`/story/${story.id}`}
-                  className="story-item__link"
-                >
-                  {story.title}
-                </Link>
+                    {domain}
+                  </a>)
+                </span>
               )}
             </h2>
 

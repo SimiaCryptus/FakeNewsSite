@@ -3,6 +3,7 @@ package com.example.news.config
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 /**
@@ -32,6 +33,14 @@ class WebConfig : WebMvcConfigurer {
             .allowCredentials(true)
             .maxAge(3600) // Cache preflight response for 1 hour
     }
+    override fun addViewControllers(registry: ViewControllerRegistry) {
+        registry.addViewController("/new").setViewName("forward:/index.html")
+        registry.addViewController("/story/**").setViewName("forward:/index.html")
+        registry.addViewController("/search").setViewName("forward:/index.html")
+        registry.addViewController("/user/**").setViewName("forward:/index.html")
+        registry.addViewController("/404").setViewName("forward:/index.html")
+    }
+
     /**
      * Configure static resource handlers.
      * Serves static resources from classpath:/static/ for all non-API requests.

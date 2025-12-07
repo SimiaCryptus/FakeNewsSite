@@ -11,6 +11,7 @@ import { NotFound } from '../pages/NotFound';
  * Application router configuration
  * Defines all routes and their corresponding components
  */
+console.log('Initializing router configuration');
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -55,8 +56,14 @@ export const router = createBrowserRouter([
 export const ROUTES = {
   HOME: '/',
   NEW: '/new',
-  STORY: (id: number | string) => `/story/${id}`,
+  STORY: (id: number | string) => {
+    console.log(`Generating story route for id: ${id}`);
+    return `/story/${id}`;
+  },
   SEARCH: '/search',
-  USER: (username: string) => `/user/${username}`,
+  USER: (username: string) => {
+    console.log(`Generating user route for username: ${username}`);
+    return `/user/${username}`;
+  },
   NOT_FOUND: '/404',
 } as const;

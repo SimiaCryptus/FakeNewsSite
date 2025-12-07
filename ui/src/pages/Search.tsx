@@ -22,6 +22,8 @@ export const Search: React.FC = () => {
     const minScore = searchParams.get('minScore');
     const sortOrder = searchParams.get('sort');
     const page = searchParams.get('page');
+    console.log('Initializing search from URL params:', { query, tags, topics, author, location, minScore, sortOrder, page });
+
 
     if (query) updateField('query', query);
     if (tags) updateField('tags', tags.split(','));
@@ -34,12 +36,14 @@ export const Search: React.FC = () => {
 
     // Trigger search if there are params
     if (query || tags || topics || author || location || minScore) {
+      console.log('Triggering initial search based on URL params');
       handleSearch();
     }
   }, []); // Only run on mount
 
   const handleSearch = async () => {
     const searchRequest = toSearchRequest();
+    console.log('Executing search with request:', searchRequest);
     await search(searchRequest);
 
     // Update URL params
@@ -52,23 +56,27 @@ export const Search: React.FC = () => {
     if (formState.minScore) params.set('minScore', formState.minScore.toString());
     if (formState.sortOrder !== StorySortOrder.SCORE) params.set('sort', formState.sortOrder);
     if (formState.page > 1) params.set('page', formState.page.toString());
+    console.log('Updating URL params:', params.toString());
 
     setSearchParams(params);
   };
 
   const handleReset = () => {
+    console.log('Resetting search form');
     resetForm();
     clearResults();
     setSearchParams({});
   };
 
   const handlePageChange = (page: number) => {
+    console.log('Changing page to:', page);
     updateField('page', page);
     // Trigger search with new page
     setTimeout(() => handleSearch(), 0);
   };
 
   const handleSortChange = (sortOrder: StorySortOrder) => {
+    console.log('Changing sort order to:', sortOrder);
     updateField('sortOrder', sortOrder);
     updateField('page', 1); // Reset to first page
     setTimeout(() => handleSearch(), 0);

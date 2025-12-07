@@ -95,8 +95,7 @@ application {
 // Copy UI build output from the :ui project to resources
 tasks.register<Copy>("copyUIBuild") {
     dependsOn(":ui:buildUI")
-    // Pulls from the 'build' directory of the 'ui' project
-    from("../ui/dist")
+    from(project(":ui").layout.buildDirectory)
     into("src/main/resources/static")
 }
 

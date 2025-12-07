@@ -1,12 +1,23 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
  import { useNewStories } from '../hooks/useStories';
  import { usePagination } from '../hooks/usePagination';
  import { StoryList } from '../components/stories/StoryList';
  import './NewStories.css';
 
  export const NewStories: React.FC = () => {
-  const { page, pageSize, goToPage, totalPages: calculatedTotalPages } = usePagination();
+  console.log('NewStories: rendering');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { page, pageSize, totalPages: calculatedTotalPages } = usePagination();
   const { data, loading, error } = useNewStories(page, pageSize);
+  console.log('NewStories: state', { page, pageSize, loading, error, data });
+  const handlePageChange = (newPage: number) => {
+    setSearchParams(prev => {
+      prev.set('page', newPage.toString());
+      return prev;
+    });
+  };
+
 
   const totalPages = data ? Math.ceil(data.totalCount / data.pageSize) : calculatedTotalPages;
 
@@ -21,10 +32,10 @@ import React from 'react';
 
       <StoryList
         storyIds={data?.ids || []}
-        currentPage={page}
+        currentPage={Number(page)}
         totalPages={totalPages}
         hasMore={data?.hasMore || false}
-        onPageChange={goToPage}
+        onPageChange={handlePageChange}
         loading={loading}
         error={error}
         emptyMessage="No new stories available at the moment"

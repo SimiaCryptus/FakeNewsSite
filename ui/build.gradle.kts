@@ -17,11 +17,11 @@ tasks.register<com.github.gradle.node.npm.task.NpmTask>("buildUI") {
     inputs.dir("src")
     inputs.files("package.json", "package-lock.json")
     // Assuming npm run build outputs to 'build' inside the ui directory
-    outputs.dir("dist")
+    outputs.dir("build")
 }
 
 tasks.register<Delete>("cleanUI") {
-    delete("dist")
+    delete("build")
     delete("node_modules")
 }
 
