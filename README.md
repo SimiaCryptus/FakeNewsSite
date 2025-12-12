@@ -144,7 +144,7 @@ curl http://localhost:8080/api/users/techuser
 
 ## 🔍 How It Works
 
-### 1. Schema Definition (`NewsApiService.kt`)
+### 1. Schema Definition ([NewsApi.kt](webapp/src/main/kotlin/com/example/news/api/NewsApi.kt))
 
 Define your API as a Kotlin interface with annotations:
 
@@ -164,7 +164,7 @@ interface NewsApiService {
 }
 ```
 
-### 2. AI Proxy Implementation (`NewsServiceLoader.kt`)
+### 2. AI Proxy Implementation ([NewsServiceLoader.kt](webapp/src/main/kotlin/com/example/news/api/NewsServiceLoader.kt))
 
 The `ProxyAgent` creates a runtime implementation powered by Claude:
 
