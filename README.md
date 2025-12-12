@@ -9,42 +9,30 @@
 
 ## 🎯 Project Overview
 
-This project demonstrates a revolutionary approach to software development where AI is involved at every stage:
+This project is a **template and demonstration**, inviting you to replace the core logic with your own ideas. It provides a solid **React/TypeScript + Spring/Kotlin** foundation that uses LLMs for intelligent data mocking.
+
+It demonstrates a revolutionary approach to software development where AI is involved at every stage:
 
 1. **🤝 Collaborative Schema Design** - Work with AI to define the API interface
 2. **⚡ AI-Powered Backend** - Use LLM proxies to implement business logic
 3. **🤖 AI-Generated Code** - Automatically generate server and client implementations
 4. **🚀 Full-Stack Application** - Deploy a complete, working application
 
-The result is a **Hacker News-style API** that is entirely AI-generated and AI-powered, demonstrating the future of software development.
+The result is a **Hacker News-style API** that is entirely AI-generated and AI-powered.
 
 ## 🏗️ Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Schema Definition                         │
-│              (NewsApiService Interface)                      │
-└─────────────────┬───────────────────────────────────────────┘
-                  │
-        ┌─────────┴─────────┐
-        │                   │
-        ▼                   ▼
-┌───────────────┐   ┌──────────────────┐
-│  AI Proxy     │   │  Code Generation │
-│  (Runtime)    │   │  (Build Time)    │
-└───────┬───────┘   └────────┬─────────┘
-        │                    │
-        ▼                    ▼
-┌───────────────┐   ┌──────────────────┐
-│ Spring Boot   │   │  React Frontend  │
-│ REST Server   │◄──┤  TypeScript UI   │
-└───────────────┘   └──────────────────┘
-        │
-        ▼
-┌───────────────┐
-│ Claude 4.5    │
-│ Haiku (LLM)   │
-└───────────────┘
+```mermaid
+graph TD
+    Schema[Schema Definition<br/>NewsApiService Interface] --> AIProxy[AI Proxy<br/>Runtime]
+    Schema --> CodeGen[Code Generation<br/>Build Time]
+    
+    AIProxy --> SpringBoot[Spring Boot<br/>REST Server]
+    CodeGen --> SpringBoot
+    CodeGen --> React[React Frontend<br/>TypeScript UI]
+    
+    React --> SpringBoot
+    SpringBoot --> Claude[Claude 4.5<br/>Haiku LLM]
 ```
 
 ## ✨ Key Features
@@ -66,6 +54,10 @@ The result is a **Hacker News-style API** that is entirely AI-generated and AI-p
 - React UI components scaffolded
 - Full type safety across the stack
 
+### 🔌 Extensible Spring Foundation
+- **Easy Decoration**: Use Spring to wrap AI proxies with caching and persistence
+- **Flexible Backend**: Seamlessly transition from AI-mocked data to real database implementations
+
 ### 📊 Rich Data Model
 - **Stories**: News articles with metadata, tags, and topics
 - **Comments**: Threaded discussions with nested replies
@@ -76,16 +68,15 @@ The result is a **Hacker News-style API** that is entirely AI-generated and AI-p
 
 ### Prerequisites
 
-- **Java 17+** (for Kotlin/Spring Boot)
 - **Node.js 18+** (for React frontend)
 - **Anthropic API Key** (for Claude 4.5 Haiku)
 
 ### 1️⃣ Setup API Key
 
-Create a file at `src/main/resources/anthropic.key` with your Anthropic API key:
+Create a file at `webapp/src/main/resources/anthropic.key` with your Anthropic API key:
 
 ```bash
-echo "your-api-key-here" > src/main/resources/anthropic.key
+echo "your-api-key-here" > webapp/src/main/resources/anthropic.key
 ```
 
 > 💡 Get your API key from [Anthropic Console](https://console.anthropic.com/)
@@ -115,7 +106,7 @@ npm install
 npm run dev
 ```
 
-The UI will be available at `http://localhost:5173`
+The UI will be available at `http://localhost:3000`.
 
 ## 📖 API Documentation
 
@@ -149,7 +140,7 @@ curl http://localhost:8080/api/users/techuser
 Define your API as a Kotlin interface with annotations:
 
 ```kotlin
-interface NewsApiService {
+interface NewsApi {
     @Description("Get the current top stories")
     fun getTopStoryIds(
         @Description("Pagination parameters")
@@ -244,13 +235,13 @@ This project demonstrates:
 
 ```
 newssite/
-├── src/main/kotlin/com/example/news/
+├── webapp/src/main/kotlin/com/example/news/
 │   ├── api/
 │   │   ├── NewsApiService.kt          # 📋 Core schema definition
 │   │   ├── NewsServiceLoader.kt       # 🤖 AI proxy setup
-│   │   └── models/                    # 📦 Data models
+│   │   ├── models/                    # 📦 Data models
 │   └── server/
-│       └── NewsApiApplication.kt      # 🚀 Spring Boot app
+│       └── NewsApplication.kt         # 🚀 Spring Boot app
 ├── ui/
 │   ├── src/
 │   │   ├── api/                       # 🔌 Generated client
@@ -283,47 +274,6 @@ newssite/
 - Test market fit
 - Validate technical approaches
 
-## 🔮 Future Enhancements
-
-- [ ] **Persistent Storage**: Add optional database backing
-- [ ] **Authentication**: User login and authorization
-- [ ] **Real-time Updates**: WebSocket support for live data
-- [ ] **Advanced Search**: Vector embeddings for semantic search
-- [ ] **Multi-model Support**: Switch between different LLMs
-- [ ] **Caching Layer**: Redis integration for performance
-- [ ] **GraphQL API**: Alternative query interface
-- [ ] **Mobile Apps**: React Native clients
-
-## 🤝 Contributing
-
-This is a demonstration project, but contributions are welcome!
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## 📝 License
 
 This project is provided as-is for educational and demonstration purposes.
-
-## 🙏 Acknowledgments
-
-- **Anthropic** - For Claude 4.5 Haiku API
-- **Cognotik** - AI proxy framework
-- **Spring Boot** - Web framework
-- **React** - UI framework
-
-## 📧 Contact
-
-For questions, suggestions, or discussions about AI-driven development:
-
-- **Issues**: [GitHub Issues](https://github.com/yourusername/newssite/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/newssite/discussions)
-
----
-
-**Built with ❤️ and 🤖 AI**
-
-*This README was collaboratively written by humans and AI, demonstrating the same principles as the project itself.*
